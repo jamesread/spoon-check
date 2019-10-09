@@ -22,8 +22,11 @@ div {
 	font-size: 120%;
 }
 
-.subtle {
+div.subtle {
 	margin-top: 2em;
-	color: gray;
 	font-size: 90%;
+}
+
+.subtle, a {
+	color: gray;
 }
