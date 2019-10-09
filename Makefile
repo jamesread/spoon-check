@@ -1,2 +1,2 @@
 default:
-	parcel build src/index.pug --public-url '.'
+	parcel build src/index.pug --public-url '.' --no-content-hash
