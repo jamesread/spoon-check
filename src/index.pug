@@ -1,0 +1,25 @@
+doctype html
+
+html
+	head
+		link(rel = 'stylesheet', type = 'text/css', href='main.css')
+
+		script(async, src = "main.js")
+
+		title spoon check
+
+	body
+		h1 spoon check
+
+		template#entryForm
+			div#emoji(role = "icon")
+			label.title
+				input(type = "spinner" min = "0" max = "5")
+				span.desc no dec
+
+			div#rateButtons(role = "toolbar")
+
+		main
+
+		div#ratings
+

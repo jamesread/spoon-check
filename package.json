@@ -1,0 +1,17 @@
+{
+  "name": "spoon-check",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "parceljs": "0.0.1"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10",
+    "pug": "^2.0.4"
+  }
+}

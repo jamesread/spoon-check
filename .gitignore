@@ -1,0 +1,6 @@
+.cache
+dist
+*-lock.json
+node_modules
+**/*.swp
+**/*.swo
