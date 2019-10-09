@@ -21,3 +21,9 @@ button {
 div {
 	font-size: 120%;
 }
+
+.subtle {
+	margin-top: 2em;
+	color: gray;
+	font-size: 90%;
+}
