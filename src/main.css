@@ -7,24 +7,30 @@ body {
 }
 
 h1 {
-	font-size: 100%;
+	font-size: normal;
+	text-decoration: underline;
+}
+
+h2 {
+	margin-bottom: 0;
 }
 
 button {
 	margin: .1em;
 }
 
-#emoji, button {
-	font-size: 3em;
+#emoji {
+	font-size: 5em;
+	margin-bottom: .5em;
 }
 
-div {
-	font-size: 120%;
+button {
+	font-size: 3em;
 }
 
 div.subtle {
 	margin-top: 2em;
-	font-size: 90%;
+	font-size: small;
 }
 
 .subtle, a {

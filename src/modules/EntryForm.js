@@ -1,7 +1,8 @@
 const ratingEmojis = [
-	"&#x1f97a",
-	"&#x1f610",
-	"&#x1f642"
+	"&#x1f641",
+	"&#x1f62c",
+	"&#x1f642",
+	"&#x2753"
 ]
 
 export default class EntryForm extends HTMLElement {
@@ -9,7 +10,7 @@ export default class EntryForm extends HTMLElement {
 		var tpl = document.querySelector('template#entryForm').cloneNode(true).content
 		this.appendChild(document.importNode(tpl, true))
 
-		this.domLabel = this.querySelector("label")
+		this.domLabel = this.querySelector("#label")
 		this.domEmoji = this.querySelector("#emoji");
 		this.domSlider = this.querySelector("input");
 
@@ -53,13 +54,19 @@ export default class EntryForm extends HTMLElement {
 		this.currentQuestion++;
 		var question = this.questions[this.currentQuestion];
 
-		this.domLabel.innerText = question['txt'];
+		this.domLabel.innerText = question['txt'] + '?';
 		this.domEmoji.innerHTML = question['emoji'];
 
 		console.log(this.currentQuestion, this.questions.length - 1)
 
 		if (this.currentQuestion == this.questions.length - 1) {
-			this.hidden = true;
+			while (this.firstChild) {
+				this.removeChild(this.firstChild);
+			}
+
+			var msg = document.createElement("p");
+			msg.innerHTML = "You checked your spoons! <br /><br /> Refresh this page if you want to do it again."
+			this.appendChild(msg);
 			document.body.querySelector("#ratings").hidden = false;
 		}
 	}
