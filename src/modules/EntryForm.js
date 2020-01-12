@@ -20,6 +20,7 @@ export default class EntryForm extends HTMLElement {
 		for (var emoji of ratingEmojis) {
 			var button = document.createElement("button");
 			button.innerHTML = emoji;
+			button.setAttribute("type", "button");
 			button.onclick = e => {
 				var v = e.target.innerHTML
 				this.onRate(v);
