@@ -56,6 +56,7 @@ export default class EntryForm extends HTMLElement {
 
 		this.domLabel.innerText = question['txt'] + '?';
 		this.domEmoji.innerHTML = question['emoji'];
+		this.domEmoji.setAttribute("title", question['txt'] + " icon")
 
 		console.log(this.currentQuestion, this.questions.length - 1)
 

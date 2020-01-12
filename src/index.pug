@@ -1,29 +1,34 @@
 doctype html
 
-html
+html(lang = "en")
 	head
 		link(rel = 'stylesheet', type = 'text/css', href='main.css')
 		link(rel = 'shortcut icon' type = "image/png" href = "icon.png")
+		link(rel = 'apple touch icon' type = "image/png" href = "icon.png")
+		link(rel = 'manifest' href = 'spoon-check.webmanifest')
 
 		meta(name = "viewport" content = "width=device-width, initial-scale=1")
+		meta(name = "theme-color" content = "#fffd7f")
+		meta(name = "description" content = "A simple app that helps express reasons for low energy when words are difficult.")
 
 		script(async, src = "main.js")
 
 		title spoon check
 
 	body
-		h1 spoon check
-
 		template#entryForm
-			h2#label
-			div#emoji(role = "icon")
+			form(title = "Spoon questionnaire")
+				h2#label
+				div#emoji(role = "img")
 
-			div#rateButtons(role = "toolbar")
+				div#rateButtons(role = "toolbar")
 
-		main
-			hr
+		header(title = "Page header")
+			h1(#appTitle) spoon check
 
-			div#ratings
+		main(title = "Spoon questionnaire, and results")
+			div#ratings(title = "Your spoon results")
 				h2 Your spoons...
 
-		div.subtle An #[a(href = "https://github.com/jamesread/spoon-check") open source app] by #[a(href = "http://jread.com") James Read].
+		footer(title = "Page footer")
+			div.subtle An #[a(href = "https://github.com/jamesread/spoon-check") open source app] by #[a(href = "http://jread.com") James Read].

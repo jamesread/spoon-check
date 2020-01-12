@@ -33,6 +33,7 @@ div.subtle {
 	font-size: small;
 }
 
-.subtle, a {
-	color: gray;
+form {
+	background-color: white;
+	padding: 1em;
 }
