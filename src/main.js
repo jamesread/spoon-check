@@ -27,7 +27,7 @@ document.querySelector("#copyResults").onclick = () => {
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').then(reg => {
 	reg.addEventListener("updatefound", () => {
-		newWorker = reg.installing;
+		var newWorker = reg.installing;
 		newWorker.addEventListener("statechange", () => {
 			let notification = document.createElement("div");
 			notification.classList += "notification"
