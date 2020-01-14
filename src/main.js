@@ -36,8 +36,14 @@ if ('serviceWorker' in navigator) {
 				case "installed":
 					if (navigator.serviceWorker.controller) {
 						notification.innerHTML = "Refresh to update this app."
+					} else {
+						notification.innerHTML = "Note: Service Worker is not the controller."
 					}
 
+					break;
+				case '':
+				case 'activating':
+				case 'activated':
 					break;
 				default:
 					notification.innerHTML = "Unhandled worker state: " + newWorker.state
