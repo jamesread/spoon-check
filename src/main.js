@@ -24,34 +24,32 @@ document.querySelector("#copyResults").onclick = () => {
 	window.alert("Results copied! You can now paste it anywhere.")
 }
 
+let pwaNote = document.createElement("p#pwaNote");
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').then(reg => {
 	reg.addEventListener("updatefound", () => {
 		var newWorker = reg.installing;
-		newWorker.addEventListener("statechange", () => {
-			let notification = document.createElement("div");
-			notification.classList += "notification"
-
+		newWorker.addEventListener("statechange", () => {	
 			switch (newWorker.state) {
 				case "installed":
 					if (navigator.serviceWorker.controller) {
-						notification.innerHTML = "Refresh to update this app."
+						pwaNote.innerHTML = "You are using an app version of this page."
 					} else {
-						notification.innerHTML = "Note: Service Worker is not the controller."
+						pwaNote.innerHTML = "PWA possible."
 					}
 
 					break;
 				case '':
 				case 'activating':
 				case 'activated':
-					break;
+					return;
 				default:
-					notification.innerHTML = "Unhandled worker state: " + newWorker.state
+					pwaNote.innerHTML = "Unhandled worker state: " + newWorker.state
 			}
-
-			document.body.appendChild(notification)
 		})
 	})
   });
+} else {
+	pwaNote.innerHTML = "Your browser does not support installation of this page as an app (PWA)."
 }
-
