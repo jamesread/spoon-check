@@ -41,6 +41,13 @@ export default class EntryForm extends HTMLElement {
 
 		document.body.querySelector("#ratings").appendChild(r)
 
+		let noRatingHelpText = document.querySelector("#noRatingHelpText")
+
+		if (noRatingHelpText != null) {
+			noRatingHelpText.remove();
+		}
+
+
 		this.askQuestion();
 	}
 
@@ -66,10 +73,7 @@ export default class EntryForm extends HTMLElement {
 				this.removeChild(this.firstChild);
 			}
 
-			var msg = document.createElement("p");
-			msg.innerHTML = "You checked your spoons! <br /><br /> Refresh this page if you want to do it again."
-			this.appendChild(msg);
-			document.body.querySelector("#ratings").hidden = false;
+			document.querySelector("p#resultsComplete").hidden = false
 		}
 	}
 }

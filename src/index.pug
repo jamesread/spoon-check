@@ -9,7 +9,7 @@ html(lang = "en")
 
 		meta(name = "viewport" content = "width=device-width, initial-scale=1")
 		meta(name = "theme-color" content = "#fffd7f")
-		meta(name = "description" content = "A simple app that helps express reasons for low energy when words are difficult.")
+		meta(name = "description" content = "A simple app that helps describes what is taking energy when words are hard.")
 
 		script(async, src = "main.js")
 
@@ -25,10 +25,16 @@ html(lang = "en")
 
 		header(title = "Page header")
 			h1(#appTitle) spoon check
+			p Describe what is taking your energy, when words are hard.
 
 		main(title = "Spoon questionnaire, and results")
-			div#ratings(title = "Your spoon results")
-				h2 Your spoons...
+			p#noRatingHelpText You have not yet rated your spoons. Use the buttons above to get started.
+			div#ratings(title = "Your spoons described")
+
+			p#resultsComplete(hidden) You described your spoons! You can #[button#copyResults copy your results] to paste them somewhere. Refresh this page if you want to do it again.
 
 		footer(title = "Page footer")
-			div.subtle An #[a(href = "https://github.com/jamesread/spoon-check") open source app] by #[a(href = "http://jread.com") James Read].
+			hr
+			p This page can be installed as an app, for quick offline access, from most modern browsers. 
+			div.subtle #[a(href = "https://en.m.wikipedia.org/wiki/Spoon_theory") What are spoons?]
+			div.subtle A free #[a(href = "https://github.com/jamesread/spoon-check") open source app] by #[a(href = "http://jread.com") James Read].

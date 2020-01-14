@@ -14,7 +14,38 @@ window.ef.addQuestion("Peopling", "&#x1F464;")
 window.ef.addQuestion("Toilet", "&#x1F6BD;")
 window.ef.askQuestion();
 
+document.querySelector("#copyResults").onclick = () => {
+	let ta = document.createElement("textarea")
+	ta.innerText = document.querySelector("#ratings").innerText
+	document.body.appendChild(ta);
+	ta.select();
+	document.execCommand("copy")
+	ta.remove();
+	window.alert("Results copied! You can now paste it anywhere.")
+}
+
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
+  navigator.serviceWorker.register('sw.js').then(reg => {
+	reg.addEventListener("updatefound", () => {
+		newWorker = reg.installing;
+		newWorker.addEventListener("statechange", () => {
+			let notification = document.createElement("div");
+			notification.classList += "notification"
+
+			switch (newWorker.state) {
+				case "installed":
+					if (navigator.serviceWorker.controller) {
+						notification.innerHTML = "Refresh to update this app."
+					}
+
+					break;
+				default:
+					notification.innerHTML = "Unhandled worker state: " + newWorker.state
+			}
+
+			document.body.appendChild(notification)
+		})
+	})
+  });
 }
 
