@@ -11,3 +11,7 @@ Feedback is very welcome. Raising a GitHub issue is the best way to communicate
 
 * Accessibility is very important. 
 * Use offline (as a "progressive web app"), so it can be installed.
+
+## Self hosting
+
+Simply copy the `dist` folder to any webserver. No server side support needed.
