@@ -16,12 +16,12 @@ html(lang = "en")
 		title spoon check
 
 	body
-		template#entryForm
-			form(title = "Spoon questionnaire")
-				h2#label
+		template#entryFormTemplate
+			form#entryForm(title = "Spoon questionnaire" aria-live="assertive")
+				h2#label(tabindex = 0)
 				div#emoji(role = "img")
 
-				div#rateButtons(role = "toolbar")
+				div#rateButtons(role = "toolbar" tabindex = 0 aria-controls = "entryForm" title = "Rating buttons")
 
 		header(title = "Page header")
 			h1(#appTitle) spoon check
@@ -31,7 +31,7 @@ html(lang = "en")
 			p#noRatingHelpText You have not yet rated your spoons. Use the buttons above to get started.
 			div#ratings(title = "Your spoons described")
 
-			p#resultsComplete(hidden) You described your spoons! You can #[button#copyResults copy your results] to paste them somewhere. Refresh this page if you want to do it again.
+			p#resultsComplete(hidden tabindex = 0) You described your spoons! You can #[button#copyResults copy your results] to paste them somewhere. Refresh this page if you want to do it again.
 
 		footer(title = "Page footer")
 			hr

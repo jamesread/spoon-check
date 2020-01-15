@@ -14,17 +14,26 @@ window.ef.addQuestion("Peopling", "&#x1F464;")
 window.ef.addQuestion("Toilet", "&#x1F6BD;")
 window.ef.askQuestion();
 
-document.querySelector("#copyResults").onclick = () => {
-	let ta = document.createElement("textarea")
-	ta.innerText = document.querySelector("#ratings").innerText
-	document.body.appendChild(ta);
-	ta.select();
-	document.execCommand("copy")
-	ta.remove();
-	window.alert("Results copied! You can now paste it anywhere.")
+var copyResultsButton = document.querySelector("#copyResults");
+
+if (copyResultsButton != null) {
+	copyResultsButton.onclick = () => {
+		let ta = document.createElement("textarea")
+		ta.innerText = document.querySelector("#ratings").innerText
+		document.body.appendChild(ta);
+		ta.select();
+		document.execCommand("copy")
+		ta.remove();
+		window.alert("Results copied! You can now paste it anywhere.")
+	}
 }
 
-let pwaNote = document.createElement("p#pwaNote");
+var pwaNote = document.querySelector("p#pwaNote");
+
+if (pwaNote == null) {
+	pwaNote = document.createElement("p")
+	document.body.append(pwaNote)
+}
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').then(reg => {

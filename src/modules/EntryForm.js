@@ -7,7 +7,7 @@ const ratingEmojis = [
 
 export default class EntryForm extends HTMLElement {
 	createElements() {
-		var tpl = document.querySelector('template#entryForm').cloneNode(true).content
+		var tpl = document.querySelector('template#entryFormTemplate').cloneNode(true).content
 		this.appendChild(document.importNode(tpl, true))
 
 		this.domLabel = this.querySelector("#label")
@@ -68,12 +68,17 @@ export default class EntryForm extends HTMLElement {
 
 		console.log(this.currentQuestion, this.questions.length - 1)
 
+		for (var button of this.querySelectorAll("#rateButtons button")) {
+			button.title = "Describe your " + question['txt'] + " as " + button.innerText;
+		}
+
 		if (this.currentQuestion == this.questions.length - 1) {
 			while (this.firstChild) {
 				this.removeChild(this.firstChild);
 			}
 
 			document.querySelector("p#resultsComplete").hidden = false
+			window.location.hash = "#resultsComplete"
 		}
 	}
 }
