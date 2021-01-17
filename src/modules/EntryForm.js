@@ -1,8 +1,8 @@
 const ratingEmojis = [
-	"&#x1f641",
-	"&#x1f62c",
-	"&#x1f642",
-	"&#x2753"
+	"&#x1f641", // Sad
+	"&#x1f62c", // Eash
+	"&#x1f642", // Happy
+	"&#x2753"   // Don't know
 ]
 
 export default class EntryForm extends HTMLElement {
@@ -19,11 +19,11 @@ export default class EntryForm extends HTMLElement {
 		var emojiIndex = 0;
 		for (var emoji of ratingEmojis) {
 			var button = document.createElement("button");
+			button.classList += "icon"
 			button.innerHTML = emoji;
 			button.setAttribute("type", "button");
 			button.onclick = e => {
 				var v = e.target.innerHTML
-				this.onRate(v);
 			}
 
 			this.querySelector("#rateButtons").appendChild(button);
@@ -34,20 +34,6 @@ export default class EntryForm extends HTMLElement {
 	}
 
 	onRate(v) {
-		var question = this.questions[this.currentQuestion];
-
-		var r = document.createElement("div");
-		r.innerHTML = question['txt'] + ": " + v
-
-		document.body.querySelector("#ratings").appendChild(r)
-
-		let noRatingHelpText = document.querySelector("#noRatingHelpText")
-
-		if (noRatingHelpText != null) {
-			noRatingHelpText.remove();
-		}
-
-
 		this.askQuestion();
 	}
 
@@ -76,9 +62,6 @@ export default class EntryForm extends HTMLElement {
 			while (this.firstChild) {
 				this.removeChild(this.firstChild);
 			}
-
-			document.querySelector("p#resultsComplete").hidden = false
-			window.location.hash = "#resultsComplete"
 		}
 	}
 }

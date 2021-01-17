@@ -28,8 +28,12 @@ html(lang = "en")
 			p Describe what is taking your energy, when words are hard.
 
 		main(title = "Spoon questionnaire, and results")
-			p#noRatingHelpText You have not yet rated your spoons. Use the buttons above to get started.
-			div#ratings(title = "Your spoons described")
+			div#drainIcons
+			
+			div#ratings(hidden title = "Your spoons described")
+				hr
+				span Spoon check - these things are draining my spoons:
+					br
 
 			p#resultsComplete(hidden tabindex = 0) You described your spoons! You can #[button#copyResults copy your results] to paste them somewhere. Refresh this page if you want to do it again.
 
