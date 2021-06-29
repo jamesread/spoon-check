@@ -1,0 +1,30 @@
+{
+  "name": "spoon-check",
+  "repository": "https://github.com/jamesread/spoon-check",
+  "version": "2.0.0",
+  "description": "",
+  "main": "node-http-server.js",
+  "targets": {
+	  "main": false
+  },
+  "scripts": {
+    "start": "node .",
+    "build": "yarn install && make",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "connect": "^3.7.0",
+    "parcel": "^2.0.0-beta.3.1",
+    "serve-static": "^1.14.1"
+  },
+  "devDependencies": {
+    "@parcel/packager-raw-url": "2.0.0-beta.3.1",
+    "@parcel/transformer-pug": "2.0.0-beta.3.1",
+    "@parcel/transformer-webmanifest": "2.0.0-beta.3.1",
+    "cssnano": "^5.0.6",
+    "postcss": "^8.3.5",
+    "pug": "^3.0.2"
+  }
+}
