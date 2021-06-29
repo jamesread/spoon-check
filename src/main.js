@@ -89,6 +89,8 @@ if (pwaNote == null) {
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').then(reg => {
 	reg.addEventListener("updatefound", () => {
+    reg.update();
+
 		var newWorker = reg.installing;
 		newWorker.addEventListener("statechange", () => {	
 			switch (newWorker.state) {
@@ -100,7 +102,11 @@ if ('serviceWorker' in navigator) {
 					}
 
 					break;
+        case 'redundant':
+          console.log("SW became redundant");
+          break;
 				case '':
+        case 'waiting':
 				case 'activating':
 				case 'activated':
 					return;
