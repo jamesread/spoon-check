@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Spoon Check",
+  "image": "icon.png",
+  "operatingSystem": "Any browser (PWA)",
+  "applicationCategory": "Utility",
+  "url": "http://spoon-check.5apps.com",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
