@@ -6,7 +6,7 @@
 
 window.drainIcons = {
 	"&#x1F6CC;": "Tiredness",  
-	"&#x1F50A": "Sound",
+	"&#x1F50A;": "Sound",
 	"&#x1F354;": "Hungry",
 	"&#x1F476;": "Baby",
 	"&#x1F375;": "Thirsty",
@@ -22,7 +22,7 @@ function onRate(v) {
 	console.log("rate", v);
 
 	var r = document.createElement("span");
-	r.innerHTML = "&nbsp;" + window.drainIcons[v] + " " + v + " " + " <br />";
+	r.innerHTML = "" + window.drainIcons[v] + " " + v + " " + " <br />";
 
 	document.body.querySelector("#ratings").appendChild(r)
 
@@ -40,18 +40,19 @@ function onRate(v) {
 function setupDrainIcons() {
 	var iconArea = document.querySelector('#drainIcons');
 
-	for (let icon of Object.keys(window.drainIcons)) {
-		var foo = document.createElement('button');
-		foo.classList += "icon"
-		foo.innerHTML = icon;
-		foo.onclick = () => {
-			onRate(icon);
+	for (let iconKey of Object.keys(window.drainIcons)) {
+		let btn = document.createElement('button');
+		btn.classList += "icon"
+    btn.setAttribute('title', window.drainIcons[iconKey])
+		btn.innerHTML = iconKey;
+		btn.onclick = () => {
+			onRate(iconKey);
 		}
 
-		iconArea.appendChild(foo);
+		iconArea.appendChild(btn);
 	}
 
-	console.log("setup icons");
+	console.log("Icon buttons setup completed.");
 }
 
 function showResults() {
@@ -68,7 +69,8 @@ var copyResultsButton = document.querySelector("#copyResults");
 if (copyResultsButton != null) {
 	copyResultsButton.onclick = () => {
 		let ta = document.createElement("textarea")
-		ta.innerText = document.querySelector("#ratings").innerText
+		ta.textContent = document.querySelector("#ratings").innerText
+    ta.textContent += "\n\n" + 'https://spoon-check.5apps.com';
 		document.body.appendChild(ta);
 		ta.select();
 		document.execCommand("copy")
