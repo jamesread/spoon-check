@@ -1,122 +1,109 @@
-// import './modules/EntryForm.js'
-
-// window.ef = document.createElement("entry-form");
-// window.ef.createElements();
-// document.body.querySelector("main").prepend(window.ef);
-
-window.drainIcons = {
-  '&#x1F6CC;': 'Tiredness',
-  '&#x1F50A;': 'Sound',
-  '&#x1F354;': 'Hungry',
-  '&#x1F476;': 'Baby',
-  '&#x1F375;': 'Thirsty',
-  '&#x1F3E5;': 'Pain',
-  '&#x1F464;': 'Peopling',
-  '&#x1F468;': 'Need alone time',
-  '&#x1F491;': 'Need cuddles',
-  '&#x1F3E2;': 'Work',
-  '&#x1F6BD;': 'Toilet'
-}
-
-function onRate (v) {
-  console.log('rate', v)
-
-  const r = document.createElement('span')
-  r.innerHTML = '' + window.drainIcons[v] + ' ' + v + ' ' + ' <br />'
-
-  document.body.querySelector('#ratings').appendChild(r)
-
-  /*
-  let noRatingHelpText = document.querySelector("#noRatingHelpText")
-
-  if (noRatingHelpText != null) {
-    noRatingHelpText.remove();
+function onClickDrainIconButton (btn) {
+  if (btn.classList.contains('selected')) {
+    btn.classList.remove('selected')
+  } else {
+    btn.classList.add('selected')
   }
-  */
 
-  showResults()
+  document.querySelector('#copyParagraph').hidden = false
 }
 
-function setupDrainIcons () {
+function setupDrainIconButtons () {
   const iconArea = document.querySelector('#drainIcons')
 
-  for (const iconKey of Object.keys(window.drainIcons)) {
+  for (const iconDescription of Object.keys(window.drainIcons)) {
+    const iconEmoji = window.drainIcons[iconDescription]
+
     const btn = document.createElement('button')
-    btn.classList += 'icon'
-    btn.setAttribute('title', window.drainIcons[iconKey])
-    btn.innerHTML = iconKey
+    btn.classList.add('drain')
+    btn.setAttribute('title', iconDescription)
+    btn.innerHTML = '<span class = "icon">' + iconEmoji + '</span> ' + iconDescription
     btn.onclick = () => {
-      onRate(iconKey)
+      onClickDrainIconButton(btn)
     }
 
     iconArea.appendChild(btn)
   }
-
-  console.log('Icon buttons setup completed.')
 }
 
-function showResults () {
-  document.querySelector('div#ratings').hidden = false
-  document.querySelector('p#resultsComplete').hidden = false
+function copyResults () {
+  let copytext = 'These things are draining my spoons; \n\n'
 
-  window.location.hash = '#resultsComplete'
+  for (const btn of document.getElementById('drainIcons').querySelectorAll('button')) {
+    if (btn.classList.contains('selected')) {
+      copytext += btn.innerText.replace('\n', ' ') + '\n'
+    }
+  }
+
+  copytext += '\n\n' + window.location
+
+  const ta = document.createElement('textarea')
+  ta.textContent = copytext
+
+  document.body.appendChild(ta)
+  ta.select()
+  document.execCommand('copy')
+  ta.remove()
+  window.alert('Results copied! You can now paste it anywhere.')
 }
 
-setupDrainIcons()
+function setupCopyResultsButton () {
+  const copyResultsButton = document.querySelector('#copyResults')
 
-const copyResultsButton = document.querySelector('#copyResults')
+  copyResultsButton.onclick = copyResults
+}
 
-if (copyResultsButton != null) {
-  copyResultsButton.onclick = () => {
-    const ta = document.createElement('textarea')
-    ta.textContent = document.querySelector('#ratings').innerText
-    ta.textContent += '\n\n' + 'https://spoon-check.5apps.com'
-    document.body.appendChild(ta)
-    ta.select()
-    document.execCommand('copy')
-    ta.remove()
-    window.alert('Results copied! You can now paste it anywhere.')
+function setupServiceWorker () {
+  const pwaNote = document.querySelector('p#pwaNote')
+
+  if ('serviceWorker' in navigator) {
+    const swUrl = new URL('sw.js')
+    navigator.serviceWorker.register(swUrl).then(reg => {
+      reg.addEventListener('updatefound', () => {
+        reg.update()
+
+        const newWorker = reg.installing
+        newWorker.addEventListener('statechange', () => {
+          switch (newWorker.state) {
+            case 'installed':
+              if (navigator.serviceWorker.controller) {
+                pwaNote.innerHTML = 'You are using an app version of this page.'
+              } else {
+                pwaNote.innerHTML = 'PWA possible.'
+              }
+
+              break
+            case 'redundant':
+              console.log('SW became redundant')
+              break
+            case '':
+            case 'waiting':
+            case 'activating':
+            case 'activated':
+              return
+            default:
+              pwaNote.innerHTML = 'Unhandled worker state: ' + newWorker.state
+          }
+        })
+      })
+    })
+  } else {
+    pwaNote.innerHTML = 'Your browser does not support installation of this page as an app (PWA).'
   }
 }
 
-let pwaNote = document.querySelector('p#pwaNote')
-
-if (pwaNote == null) {
-  pwaNote = document.createElement('p')
-  document.body.append(pwaNote)
-}
-
-if ('serviceWorker' in navigator) {
-  const swUrl = new URL('sw.js')
-  navigator.serviceWorker.register(swUrl).then(reg => {
-    reg.addEventListener('updatefound', () => {
-      reg.update()
-
-      const newWorker = reg.installing
-      newWorker.addEventListener('statechange', () => {
-        switch (newWorker.state) {
-          case 'installed':
-            if (navigator.serviceWorker.controller) {
-              pwaNote.innerHTML = 'You are using an app version of this page.'
-            } else {
-              pwaNote.innerHTML = 'PWA possible.'
-            }
-
-            break
-          case 'redundant':
-            console.log('SW became redundant')
-            break
-          case '':
-          case 'waiting':
-          case 'activating':
-          case 'activated':
-            return
-          default:
-            pwaNote.innerHTML = 'Unhandled worker state: ' + newWorker.state
-        }
-      })
-    })
+function setup () {
+  window.fetch('data/icons.json', {
+    method: 'GET'
+  }).then((response) => {
+    return response.json()
+  }).then((json) => {
+    window.drainIcons = json
+    setupDrainIconButtons()
   })
-} else {
-  pwaNote.innerHTML = 'Your browser does not support installation of this page as an app (PWA).'
+
+  setupCopyResultsButton()
+  setupServiceWorker()
 }
+
+setup()

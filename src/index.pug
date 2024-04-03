@@ -12,11 +12,10 @@ html(lang = "en")
 		meta(name = "theme-color" content = "#fffd7f")
 		meta(name = "description" content = "A simple app that helps describes what is taking energy when words are hard.")
 
-		script(async, src = "main.js")
-
-		title spoon check
+		title spoon-check
 
 	body
+
 		template#entryFormTemplate
 			form#entryForm(title = "Spoon questionnaire" aria-live="assertive")
 				h2#label(tabindex = 0)
@@ -26,21 +25,19 @@ html(lang = "en")
 
 		header(title = "Page header")
 			h1(#appTitle) spoon check
-			p Describe what is taking your energy, when words are hard.
+			p : Describe what is taking your energy, when words are hard.
 
-		main(title = "Spoon questionnaire, and results")
+		main(title = "Spoon questionnaire")
 			div#drainIcons
-			
-			div#ratings(hidden title = "Your spoons described")
-				hr
-				span Spoon check - these things are draining my spoons:
-					br
-					br 
 
-			p#resultsComplete(hidden tabindex = 0) You described your spoons! You can #[button#copyResults copy your results] to paste them somewhere. Refresh this page if you want to do it again.
+			p#copyParagraph(hidden tabindex = 0) You can #[button#copyResults copy your results] to paste them somewhere.
 
 		footer(title = "Page footer")
-			hr
-			p#pwaNote This page can be installed as an app, for quick offline access, from most modern browsers. 
-			div.subtle #[a(href = "https://en.m.wikipedia.org/wiki/Spoon_theory") What are spoons?]
-			div.subtle A free #[a(href = "https://github.com/jamesread/spoon-check") open source app] by #[a(href = "http://jread.com") James Read].
+			p#pwaNote This page can be installed as an app, for quick offline access, from most modern browsers.
+
+			ul
+				li #[a(href = "https://en.m.wikipedia.org/wiki/Spoon_theory") What are spoons?]
+				li |
+				li A free #[a(href = "https://github.com/jamesread/spoon-check") open source app] by #[a(href = "http://jread.com") James Read].
+
+		script(src = "main.js")

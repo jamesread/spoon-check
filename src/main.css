@@ -1,14 +1,18 @@
 body {
-	background-color: #fffdf7;
+	background-color: #dee3e7;
 	color: black;
 	font-family: sans-serif;
-	text-align: center;
 	line-height: 1.5;
+	text-align: center;
+}
+
+header * {
+  display: inline-block;
 }
 
 h1 {
-	font-size: medium;
-	text-decoration: underline;
+  font-size: medium;
+  display: inline-block;
 	margin: 0;
 }
 
@@ -16,30 +20,46 @@ h2 {
 	margin-bottom: 0;
 }
 
+#drainIcons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-gap: 1em;
+}
+
 button {
+  align-items: center;
+  background-color: white;
+  border: 1px solid #999;
+  border-radius: .3em;
+  box-shadow: 0 0 6px #fefefe;
+  cursor: pointer;
+  display: inline-flex;
 	margin: .1em;
+  padding: .6em;
+  text-align: left;
+  transition: background-color .3s;
 }
 
-#emoji {
-	font-size: 5em;
-	margin-bottom: .5em;
+button:hover {
+  border: 1px solid black;
 }
 
-button.icon {
+.selected {
+  background-color: #9aee9a;
+}
+
+.icon {
 	font-size: 3em;
+  padding-right: .5em;
 }
 
-div.subtle {
-	margin-top: 2em;
+footer li {
+  display: inline-block;
 	font-size: small;
+  padding: .4em;
 }
 
-form {
-	background-color: white;
-	padding: 1em;
+textarea {
+  left: -9999px;
+  position: absolute;
 }
-
-#ratings {
-	font-size: 2.5em;
-}
-

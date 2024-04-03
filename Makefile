@@ -6,7 +6,8 @@ dist-prod: clean
 
 clean:
 	rm -rf dist/
-	mkdir dist/
+	mkdir -p dist/data
+	cp src/data/icons.json dist/data/
 
 buildah:
 	podman stop -i spoon-check
