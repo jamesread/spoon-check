@@ -4,7 +4,7 @@ FROM docker.io/lipanski/docker-static-website:latest
 EXPOSE 3000/tcp
 
 
-COPY -r dist/* .
+COPY dist/* .
 
 VOLUME ./data
 
