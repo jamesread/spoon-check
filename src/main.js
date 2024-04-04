@@ -57,42 +57,51 @@ function setupServiceWorker () {
   const pwaNote = document.querySelector('p#pwaNote')
 
   if ('serviceWorker' in navigator) {
-    const swUrl = new URL('sw.js')
-    navigator.serviceWorker.register(swUrl).then(reg => {
-      reg.addEventListener('updatefound', () => {
-        reg.update()
+    const swUrl = new URL('sw.js', import.meta.url)
 
-        const newWorker = reg.installing
-        newWorker.addEventListener('statechange', () => {
-          switch (newWorker.state) {
-            case 'installed':
-              if (navigator.serviceWorker.controller) {
-                pwaNote.innerHTML = 'You are using an app version of this page.'
-              } else {
-                pwaNote.innerHTML = 'PWA possible.'
-              }
+    try {
+      navigator.serviceWorker.register(swUrl, {
+        type: 'module'
+      }).then(reg => {
+        reg.addEventListener('updatefound', () => {
+          reg.update()
 
-              break
-            case 'redundant':
-              console.log('SW became redundant')
-              break
-            case '':
-            case 'waiting':
-            case 'activating':
-            case 'activated':
-              return
-            default:
-              pwaNote.innerHTML = 'Unhandled worker state: ' + newWorker.state
-          }
+          const newWorker = reg.installing
+
+          newWorker.addEventListener('statechange', () => {
+            switch (newWorker.state) {
+              case 'installed':
+                if (navigator.serviceWorker.controller) {
+                  pwaNote.innerHTML = 'You are using an app version of this page.'
+                } else {
+                  pwaNote.innerHTML = 'PWA possible.'
+                }
+
+                break
+              case 'redundant':
+                pwaNote.innerHTML = 'SW became redundant'
+                break
+              case '':
+              case 'waiting':
+              case 'activating':
+              case 'activated':
+                return
+              default:
+                pwaNote.innerHTML = 'Unhandled worker state: ' + newWorker.state
+            }
+          })
         })
       })
-    })
+    } catch (e) {
+      console.error(e)
+      pwaNote.innerHTML = e
+    }
   } else {
     pwaNote.innerHTML = 'Your browser does not support installation of this page as an app (PWA).'
   }
 }
 
-function setup () {
+export default function setup () {
   window.fetch('data/icons.json', {
     method: 'GET'
   }).then((response) => {
@@ -105,5 +114,3 @@ function setup () {
   setupCopyResultsButton()
   setupServiceWorker()
 }
-
-setup()

@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@parcel/service-worker": "^2.12.0",
     "connect": "^3.7.0",
     "parcel": "^2.12.0",
     "serve-static": "^1.14.1",

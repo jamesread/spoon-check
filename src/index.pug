@@ -40,4 +40,9 @@ html(lang = "en")
 				li |
 				li A free #[a(href = "https://github.com/jamesread/spoon-check") open source app] by #[a(href = "http://jread.com") James Read].
 
-		script(src = "main.js")
+		script(type = "module").
+			import setup from './main.js'
+
+			setup()
+
+

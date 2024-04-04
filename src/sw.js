@@ -1,44 +1,26 @@
-const VERSION = 2
-const PRECACHE = 'precache-v1'
+import { manifest, version } from '@parcel/service-worker'
+
 const RUNTIME = 'runtime'
 
-// A list of local resources we always want to be cached.
-const PRECACHE_URLS = [
-  'index.html',
-  './', // Alias for index.html
-  'icon.83aa3da3.png',
-  'main.1f19ae8e.js',
-  'main.af46ece4.css',
-  'spoon-check.webmanifest'
-]
+async function install () {
+  const cache = await caches.open(version)
 
-// The install handler takes care of precaching the resources we always need.
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(PRECACHE)
-      .then(cache => cache.addAll(PRECACHE_URLS))
-      .then(self.skipWaiting())
-  )
-})
+  await cache.addAll(manifest)
+}
 
 // The activate handler takes care of cleaning up old caches.
-self.addEventListener('activate', event => {
-  const currentCaches = [PRECACHE, RUNTIME]
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return cacheNames.filter(cacheName => !currentCaches.includes(cacheName))
-    }).then(cachesToDelete => {
-      return Promise.all(cachesToDelete.map(cacheToDelete => {
-        return caches.delete(cacheToDelete)
-      }))
-    }).then(() => self.clients.claim())
+async function activate () {
+  const keys = await caches.keys()
+
+  await Promise.all(
+    keys.map(k => k !== version && caches.delete(k))
   )
-})
+}
 
 // The fetch handler serves responses for same-origin resources from a cache.
 // If no response is found, it populates the runtime cache with the response
 // from the network before returning it to the page.
-self.addEventListener('fetch', event => {
+async function swFetch (event) {
   // Skip cross-origin requests, like those for Google Analytics.
   if (event.request.url.startsWith(self.location.origin)) {
     event.respondWith(
@@ -58,4 +40,8 @@ self.addEventListener('fetch', event => {
       })
     )
   }
-})
+}
+
+addEventListener('install', e => e.waitUntil(install()))
+addEventListener('activate', e => e.waitUntil(activate()))
+addEventListener('fetch', e => e.waitUntil(swFetch(e)))
