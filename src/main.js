@@ -35,7 +35,7 @@ function copyResults () {
     }
   }
 
-  copytext += '\n\n' + window.location
+  copytext += '\n' + window.location
 
   const ta = document.createElement('textarea')
   ta.textContent = copytext
