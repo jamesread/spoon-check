@@ -42,7 +42,7 @@ jobs:
 
     - name: Get date
       run: | 
-        echo "DATE=$(date +'%Y-%m-%d')" >> "$GITHUB_ENV"
+        echo "DATE=$(date +'%s')" >> "$GITHUB_ENV"
 
     - name: Build the Container image
       run: docker build . --file Dockerfile --tag ghcr.io/jamesread/spoon-check:${{ env.DATE }}
