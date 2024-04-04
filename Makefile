@@ -14,7 +14,8 @@ buildah:
 	podman rm -i spoon-check
 	podman rmi -i spoon-check:latest
 	buildah bud -t spoon-check:latest .
-	podman create --name spoon-check -p 8080:8080 spoon-check:latest
+	podman create --name spoon-check -p 3000:3000 spoon-check:latest
+	podman start spoon-check
 
 lint:
 	stylelint src/main.css

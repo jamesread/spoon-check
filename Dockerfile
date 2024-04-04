@@ -3,5 +3,8 @@ FROM docker.io/lipanski/docker-static-website:latest
 
 EXPOSE 3000/tcp
 
-COPY dist/* .
+
+COPY -r dist/* .
+
+VOLUME ./data
 
