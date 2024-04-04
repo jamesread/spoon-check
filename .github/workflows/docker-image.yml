@@ -34,6 +34,9 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.CONTAINER_TOKEN }}
 
+    - name: Make npm install
+      run: npm install
+
     - name: Make dist-prod
       run: make -w dist-prod
 
