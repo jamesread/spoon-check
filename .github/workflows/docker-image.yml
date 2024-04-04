@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Use Node.js 
+    - name: Use Node.js
       uses: actions/setup-node@v3
       with:
         node-version: 18.x
@@ -29,7 +29,7 @@ jobs:
 
     - name: Login to ghcr
       uses: docker/login-action@v2
-      with: 
+      with:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.CONTAINER_TOKEN }}
@@ -41,11 +41,17 @@ jobs:
       run: make -w dist-prod
 
     - name: Get date
-      run: | 
+      run: |
         echo "DATE=$(date +'%s')" >> "$GITHUB_ENV"
 
     - name: Build the Container image
       run: docker build . --file Dockerfile --tag ghcr.io/jamesread/spoon-check:${{ env.DATE }}
 
+    - name: Tag latest
+      run: docker tag ghcr.io/jamesread/spoon-check:${{ env.DATE }} ghcr.io/jamesread/spoon-check:latest
+
     - name: Push the Container image
       run: docker push ghcr.io/jamesread/spoon-check:${{ env.DATE }}
+
+    - name: Push the Container image - latest tag
+      run: docker push ghcr.io/jamesread/spoon-check:latest

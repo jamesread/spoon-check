@@ -15,12 +15,14 @@ Feedback is very welcome. Raising a GitHub issue is the best way to communicate
 * Accessibility is very important. 
 * Use offline (as a "progressive web app"), so it can be installed.
 
-## Self hosting
+## Self host - any webserver
 
 Simply copy the `dist` folder to any webserver. No server side support needed.
 
 You can customize data/icons.json to suit your needs.
 
-## Docker Container
+## Self host - Docker Container
 
-ghcr.io/jamesread/spoon-check
+```
+docker run -p 3000:3000 ghcr.io/jamesread/spoon-check
+```
