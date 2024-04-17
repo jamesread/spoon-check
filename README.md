@@ -2,6 +2,10 @@
 
 Describe what is taking your energy, when words are hard.
 
+<p align = "center">
+<img src = "screenshot.png" alt = "screenshot" />
+</p>
+
 Hosted version: http://spoon-check.5apps.com/
 Linux Container version: (see below)
 
