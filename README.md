@@ -8,6 +8,8 @@ Describe what is taking your energy, when words are hard.
 
 </div>
 
+![Screenshot](screenshot.png)
+
 * Hosted version: https://jamesread.github.io/spoon-check/
 * Linux Container version: (see below)
 
