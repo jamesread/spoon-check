@@ -5,6 +5,7 @@
 Describe what is taking your energy, when words are hard.
 
 ![Maturity Badge](https://img.shields.io/badge/maturity-Production-brightgreen)
+[![Discord](https://img.shields.io/discord/846737624960860180?label=Discord%20Server)](https://discord.gg/jhYWWpNJ3v)
 
 </div>
 
