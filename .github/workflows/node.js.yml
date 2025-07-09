@@ -31,9 +31,9 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
           cache: 'npm'
           node-version-file: src/package.json
+          cache-dependency-path: src/package-lock.json
       - run: npm ci
       - run: make dist-prod
       - name: Upload static files as artifact
