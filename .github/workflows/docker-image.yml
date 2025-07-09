@@ -38,9 +38,6 @@ jobs:
     - name: Make npm install
       run: make -wC frontend
 
-    - name: Make dist-prod
-      run: make -w dist-prod
-
     - name: Get date
       run: |
         echo "DATE=$(date +'%s')" >> "$GITHUB_ENV"
