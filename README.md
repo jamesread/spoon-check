@@ -9,8 +9,8 @@ Describe what is taking your energy, when words are hard.
 
 </div>
 
-![Screenshot](var/screenshots/mainpage-laptop.png)
-![Screenshot](var/screenshots/mainpage-phone.png)
+![Screenshot](var/screenshots/mainpage-laptop_framed.png)
+![Screenshot](var/screenshots/mainpage-phone_framed.png)
 
 * Hosted version: https://jamesread.github.io/spoon-check/
 * Linux Container version: (see below)
