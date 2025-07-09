@@ -33,6 +33,7 @@ jobs:
         with:
           node-version: 22.x
           cache: 'npm'
+          node-version-file: src/package.json
       - run: npm ci
       - run: make dist-prod
       - name: Upload static files as artifact
