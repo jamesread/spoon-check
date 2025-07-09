@@ -1,13 +1,5 @@
-dist-dev: clean
-	parcel build src/index.pug --public-url '.' --no-content-hash
-
-dist-prod: clean
-	parcel build src/index.pug --public-url '.' --no-content-hash --no-source-maps
-
-clean:
-	rm -rf dist/
-	mkdir -p dist/data
-	cp src/data/icons.json dist/data/
+frontend:
+	make -wC frontend
 
 buildah:
 	podman stop -i spoon-check
@@ -21,3 +13,5 @@ lint:
 	stylelint src/main.css
 	eslint src/*.js
 	eslint src/modules/*.js
+
+.PHONY: frontend

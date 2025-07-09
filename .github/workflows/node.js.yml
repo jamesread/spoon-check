@@ -34,8 +34,9 @@ jobs:
           cache: 'npm'
           node-version-file: src/package.json
           cache-dependency-path: src/package-lock.json
-      - run: npm ci
-      - run: make dist-prod
+
+      - run: make frontend
+
       - name: Upload static files as artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action

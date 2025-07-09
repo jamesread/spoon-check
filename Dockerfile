@@ -5,6 +5,6 @@ EXPOSE 3000/tcp
 
 LABEL org.opencontainers.image.source https://github.com/jamesread/spoon-check
 
-COPY dist/ .
+COPY src/dist/ .
 
 VOLUME ./data

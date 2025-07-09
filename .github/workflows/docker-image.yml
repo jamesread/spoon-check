@@ -36,7 +36,7 @@ jobs:
         password: ${{ secrets.CONTAINER_TOKEN }}
 
     - name: Make npm install
-      run: npm install
+      run: make -wC frontend
 
     - name: Make dist-prod
       run: make -w dist-prod
