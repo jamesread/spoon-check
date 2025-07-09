@@ -1,5 +1,5 @@
 <div align = "center">
-  <img alt = "project logo" src = "logo.png" width = "128" />
+  <img alt = "project logo" src = "icon.png" width = "128" />
   <h1>spoon-check</h1>
 
 Describe what is taking your energy, when words are hard.
@@ -9,7 +9,8 @@ Describe what is taking your energy, when words are hard.
 
 </div>
 
-![Screenshot](screenshot.png)
+![Screenshot](var/screenshots/mainpage-laptop.png)
+![Screenshot](var/screenshots/mainpage-phone.png)
 
 * Hosted version: https://jamesread.github.io/spoon-check/
 * Linux Container version: (see below)

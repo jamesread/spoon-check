@@ -1,71 +1,31 @@
-body {
-	background-color: #dee3e7;
-	color: black;
-	font-family: sans-serif;
-	line-height: 1.5;
-	text-align: center;
-  max-width: 740px;
-  margin: auto;
-}
+@import 'femtocrank/style.css';
 
-header * {
-  display: inline-block;
-}
-
-h1 {
-  font-size: medium;
-  display: inline-block;
-	margin: 0;
-}
-
-h2 {
-	margin-bottom: 0;
-}
 
 #drainIcons {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 200px));
+  max-width: calc(4*220px);
   grid-gap: 1em;
+  justify-content: center;
 }
 
-button {
-  align-items: center;
-  background-color: white;
-  border: 1px solid #999;
-  border-radius: .3em;
-  box-shadow: 0 0 6px #fefefe;
-  cursor: pointer;
-  display: inline-flex;
-	margin: .1em;
-  padding: .6em;
-  text-align: left;
-  transition: background-color .3s;
-}
-
-button:hover {
-  border: 1px solid black;
-}
-
-.selected {
+button.selected {
   background-color: #9aee9a;
 }
 
-.icon {
-	font-size: 3em;
-  padding-right: .5em;
+button {
+  display: inline-flex;
+  align-items: center;
+  gap: .25em;
 }
 
-footer {
-  padding-top: 4em;
+#copyParagraph {
+  margin-top: 3em;
+  text-align: center;
 }
 
-footer li {
-  display: inline-block;
-	font-size: small;
-  padding: .4em;
-}
-
-textarea {
-  left: -9999px;
-  position: absolute;
+main {
+  place-items: center;
+  flex-direction: column;
+  display: flex;
 }

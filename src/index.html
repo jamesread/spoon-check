@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<link rel="shortcut icon" type="image/png" href="icon.png">
+		<link rel="apple touch icon" type="image/png" href="icon.png">
+		<link rel="manifest" href="spoon-check.webmanifest">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#fffd7f">
+		<meta name="description" content="A simple app that helps describes what is taking energy when words are hard.">
+		<title>spoon-check</title>
+	</head>
+	<body>
+		<template id="entryFormTemplate">
+			<form id="entryForm" title="Spoon questionnaire" aria-live="assertive">
+				<h2 id="label" tabindex="0"></h2>
+				<div id="emoji" role="img"></div>
+				<div id="rateButtons" role="toolbar" tabindex="0" aria-controls="entryForm" title="Rating buttons"></div>
+			</form>
+		</template>
+		<header title="Page header">
+			<div class = "flex-row">
+				<img src = "icon.svg" class = "logo" />
+				<h1 id = "appTitle">spoon check</h1>
+			</div>
+			<p>Describe what is taking your energy, when words are hard.</p>
+		</header>
+		<main title="Spoon questionnaire">
+			<div id="drainIcons"></div>
+			<p id="copyParagraph" hidden tabindex="0">You can
+			<button id="copyResults">copy your results</button> to paste them somewhere.
+			</p>
+		</main>
+		<footer title="Page footer">
+			<p id="pwaNote">This page can be installed as an app, for quick offline access, from most modern browsers.</p>
+
+			<span><a href="https://en.m.wikipedia.org/wiki/Spoon_theory">What are spoons?</a></span>
+			<span>A free <a href="https://github.com/jamesread/spoon-check">open source app</a> by <a href="http://jread.com">James Read</a>.</span>
+		</footer>
+		<script type="module">
+			import setup from './main.js'
+
+	  setup()
+		</script>
+	</body>
+</html>
