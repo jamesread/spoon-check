@@ -32,8 +32,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           cache: 'npm'
-          node-version-file: src/package.json
-          cache-dependency-path: src/package-lock.json
+          node-version-file: frontend/package.json
+          cache-dependency-path: frontend/package-lock.json
 
       - run: make frontend
 
