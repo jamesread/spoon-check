@@ -9,6 +9,14 @@
   justify-content: center;
 }
 
+button.neutral {
+  background-color: #fff;
+}
+
+button:hover {
+  background-color: #f0f0f0;
+}
+
 button.selected {
   background-color: #9aee9a;
 }
@@ -17,6 +25,7 @@ button {
   display: inline-flex;
   align-items: center;
   gap: .25em;
+  box-shadow: 0 0 6px #d2d2d2;
 }
 
 #copyParagraph {

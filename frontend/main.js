@@ -16,6 +16,7 @@ function setupDrainIconButtons () {
 
     const btn = document.createElement('button')
     btn.classList.add('drain')
+    btn.classList.add('neutral')
     btn.setAttribute('title', iconDescription)
     btn.innerHTML = '<span class = "icon">' + iconEmoji + '</span> ' + iconDescription
     btn.onclick = () => {
