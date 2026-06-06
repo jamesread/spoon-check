@@ -1,47 +1,82 @@
-import { manifest, version } from '@parcel/service-worker'
+/* global caches, clients, fetch, self */
 
-const RUNTIME = 'runtime'
+const VERSION = 'v2'
+const CACHE_PREFIX = 'spoon-check'
+const PRECACHE = `${CACHE_PREFIX}-precache-${VERSION}`
+const RUNTIME = `${CACHE_PREFIX}-runtime-${VERSION}`
+const PRECACHE_URLS = [
+  './',
+  './index.html',
+  './data/icons.json'
+]
 
 async function install () {
-  const cache = await caches.open(version)
+  const cache = await caches.open(PRECACHE)
 
-  await cache.addAll(manifest)
+  await cache.addAll(PRECACHE_URLS)
+  await self.skipWaiting()
 }
 
 // The activate handler takes care of cleaning up old caches.
 async function activate () {
   const keys = await caches.keys()
+  const expectedCaches = [PRECACHE, RUNTIME]
 
   await Promise.all(
-    keys.map(k => k !== version && caches.delete(k))
+    keys.map(k => {
+      if (k.startsWith(CACHE_PREFIX) && !expectedCaches.includes(k)) {
+        return caches.delete(k)
+      }
+
+      return null
+    })
   )
+
+  await clients.claim()
 }
 
-// The fetch handler serves responses for same-origin resources from a cache.
-// If no response is found, it populates the runtime cache with the response
-// from the network before returning it to the page.
-async function swFetch (event) {
-  // Skip cross-origin requests, like those for Google Analytics.
-  if (event.request.url.startsWith(self.location.origin)) {
-    event.respondWith(
-      caches.match(event.request).then(cachedResponse => {
-        if (cachedResponse) {
-          return cachedResponse
-        }
+async function networkFirst (request) {
+  const cache = await caches.open(RUNTIME)
 
-        return caches.open(RUNTIME).then(cache => {
-          return fetch(event.request).then(response => {
-            // Put a copy of the response in the runtime cache.
-            return cache.put(event.request, response.clone()).then(() => {
-              return response
-            })
-          })
-        })
-      })
-    )
+  try {
+    const response = await fetch(request)
+
+    if (response.ok) {
+      await cache.put(request, response.clone())
+    }
+
+    return response
+  } catch (err) {
+    const cachedResponse = await caches.match(request)
+
+    if (cachedResponse) {
+      return cachedResponse
+    }
+
+    if (request.mode === 'navigate') {
+      return caches.match('./index.html')
+    }
+
+    throw err
   }
 }
 
-addEventListener('install', e => e.waitUntil(install()))
-addEventListener('activate', e => e.waitUntil(activate()))
-addEventListener('fetch', e => e.waitUntil(swFetch(e)))
+// The fetch handler keeps same-origin resources fresh when online and falls
+// back to cached responses when the network is unavailable.
+async function swFetch (event) {
+  if (event.request.method !== 'GET') {
+    return
+  }
+
+  const requestUrl = new URL(event.request.url)
+
+  if (requestUrl.origin !== self.location.origin) {
+    return
+  }
+
+  event.respondWith(networkFirst(event.request))
+}
+
+self.addEventListener('install', e => e.waitUntil(install()))
+self.addEventListener('activate', e => e.waitUntil(activate()))
+self.addEventListener('fetch', swFetch)
