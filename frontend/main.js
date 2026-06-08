@@ -58,12 +58,10 @@ function setupServiceWorker () {
   const pwaNote = document.querySelector('p#pwaNote')
 
   if ('serviceWorker' in navigator) {
-    const swUrl = new URL('sw.js', import.meta.url)
+    const swUrl = new URL('sw.js', window.location.href)
 
     try {
-      navigator.serviceWorker.register(swUrl, {
-        type: 'module'
-      }).then(reg => {
+      navigator.serviceWorker.register(swUrl).then(reg => {
         reg.addEventListener('updatefound', () => {
           reg.update()
 
