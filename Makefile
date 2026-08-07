@@ -10,8 +10,6 @@ buildah:
 	podman start spoon-check
 
 lint:
-	stylelint src/main.css
-	eslint src/*.js
-	eslint src/modules/*.js
+	make -wC frontend lint
 
-.PHONY: frontend
+.PHONY: frontend lint

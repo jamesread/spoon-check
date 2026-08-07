@@ -1,5 +1,3 @@
-/* global caches, clients, fetch, self */
-
 const VERSION = 'v2'
 const CACHE_PREFIX = 'spoon-check'
 const PRECACHE = `${CACHE_PREFIX}-precache-${VERSION}`

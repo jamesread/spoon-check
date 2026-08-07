@@ -5,11 +5,11 @@ function onClickDrainIconButton (btn) {
     btn.classList.add('selected')
   }
 
-  document.querySelector('#copyParagraph').hidden = false
+  document.querySelector('#copy-paragraph').hidden = false
 }
 
 function setupDrainIconButtons () {
-  const iconArea = document.querySelector('#drainIcons')
+  const iconArea = document.querySelector('#drain-icons')
 
   for (const iconDescription of Object.keys(window.drainIcons)) {
     const iconEmoji = window.drainIcons[iconDescription]
@@ -30,7 +30,7 @@ function setupDrainIconButtons () {
 function copyResults () {
   let copytext = 'These things are draining my spoons; \n\n'
 
-  for (const btn of document.getElementById('drainIcons').querySelectorAll('button')) {
+  for (const btn of document.getElementById('drain-icons').querySelectorAll('button')) {
     if (btn.classList.contains('selected')) {
       copytext += btn.innerText.replace('\n', ' ') + '\n'
     }
@@ -49,7 +49,7 @@ function copyResults () {
 }
 
 function setupCopyResultsButton () {
-  const copyResultsButton = document.querySelector('#copyResults')
+  const copyResultsButton = document.querySelector('#copy-results')
 
   copyResultsButton.onclick = copyResults
 }
