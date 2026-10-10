@@ -1,12 +1,18 @@
-@import 'femtocrank/style.css';
+@import url('femtocrank/style.css');
 
-
-#drainIcons {
+#drain-icons {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 200px));
-  max-width: calc(4*220px);
-  grid-gap: 1em;
+  max-width: calc(4 * 220px);
+  gap: 1em;
   justify-content: center;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  gap: .25em;
+  box-shadow: 0 0 6px #d2d2d2;
 }
 
 button.neutral {
@@ -21,14 +27,7 @@ button.selected {
   background-color: #9aee9a;
 }
 
-button {
-  display: inline-flex;
-  align-items: center;
-  gap: .25em;
-  box-shadow: 0 0 6px #d2d2d2;
-}
-
-#copyParagraph {
+#copy-paragraph {
   margin-top: 3em;
   text-align: center;
 }

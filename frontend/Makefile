@@ -8,4 +8,8 @@ build:
 	cp -r data dist/
 	cp sw.js dist/
 
-.PHONY: ci npmci build
+lint:
+	npx stylelint main.css blat.css
+	npx eslint main.js sw.js
+
+.PHONY: ci npmci build lint
